@@ -1,6 +1,6 @@
 package com.example.calculator;
 
-public class Constantes {
+public class Consts {
 
     public static final String OPERATOR_MULT = "x";
     public static final String OPERATOR_SPLIT = "÷";

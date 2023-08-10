@@ -18,4 +18,5 @@
     <string name="btn_text_8">8</string>
     <string name="btn_text_9">9</string>
     <string name="btn_text_c">c</string>
+    <string name="message_exp_incorrect">La expresion es incorrecta</string>
 </resources>

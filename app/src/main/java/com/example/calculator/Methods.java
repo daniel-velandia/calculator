@@ -4,14 +4,14 @@ import android.widget.EditText;
 
 import java.util.Locale;
 
-public class Metodos {
+public class Methods {
     public static String getOperator(String operation) {
-        String operator = operation.contains(Constantes.OPERATOR_MULT) ? Constantes.OPERATOR_MULT :
-                operation.contains(Constantes.OPERATOR_SPLIT) ? Constantes.OPERATOR_SPLIT :
-                        operation.contains(Constantes.OPERATOR_ADD) ? "\\" + Constantes.OPERATOR_ADD : Constantes.OPERATOR_NULL;
+        String operator = operation.contains(Consts.OPERATOR_MULT) ? Consts.OPERATOR_MULT :
+                operation.contains(Consts.OPERATOR_SPLIT) ? Consts.OPERATOR_SPLIT :
+                        operation.contains(Consts.OPERATOR_ADD) ? "\\" + Consts.OPERATOR_ADD : Consts.OPERATOR_NULL;
 
-        if (operator.equals(Constantes.OPERATOR_NULL) && operation.lastIndexOf(Constantes.OPERATOR_SUB) > 0) {
-            operator = Constantes.OPERATOR_SUB;
+        if (operator.equals(Consts.OPERATOR_NULL) && operation.lastIndexOf(Consts.OPERATOR_SUB) > 0) {
+            operator = Consts.OPERATOR_SUB;
         }
         return operator;
     }
@@ -23,16 +23,16 @@ public class Metodos {
             return;
         }
 
-        if (operation.contains(Constantes.DOT) &&
-                operation.lastIndexOf(Constantes.DOT) == operation.length() - 1) {
+        if (operation.contains(Consts.DOT) &&
+                operation.lastIndexOf(Consts.DOT) == operation.length() - 1) {
             operation = operation.substring(0, operation.length() - 1);
         }
 
-        String operator = Metodos.getOperator(operation);
+        String operator = Methods.getOperator(operation);
         String[] values = new String[0];
-        if (!operator.equals(Constantes.OPERATOR_NULL)) {
-            if (operator.equals(Constantes.OPERATOR_SUB)) {
-                final int index = operation.lastIndexOf(Constantes.OPERATOR_SUB);
+        if (!operator.equals(Consts.OPERATOR_NULL)) {
+            if (operator.equals(Consts.OPERATOR_SUB)) {
+                final int index = operation.lastIndexOf(Consts.OPERATOR_SUB);
                 values = new String[2];
                 values[0] = operation.substring(0, index);
                 values[1] = operation.substring(index + 1);
@@ -48,7 +48,7 @@ public class Metodos {
                 etInput.getText().clear();
                 callback.onIsEditing();
                 etInput.append(String.format(Locale.ROOT, "%.2f",
-                        Metodos.getResult(numberOne, operator, numberTwo)));
+                        Methods.getResult(numberOne, operator, numberTwo)));
             } catch (NumberFormatException e) {
                 if (fromResult) {
                     callback.onShowMessage(R.string.message_exp_incorrect);
@@ -56,7 +56,7 @@ public class Metodos {
             }
         } else {
             if (fromResult) {
-                if (!operator.equals(Constantes.OPERATOR_NULL)){
+                if (!operator.equals(Consts.OPERATOR_NULL)){
                     callback.onShowMessage(R.string.message_exp_incorrect);
                 }
             }
@@ -69,16 +69,16 @@ public class Metodos {
         operator = operator.replace("\\", "");
 
         switch (operator) {
-            case Constantes.OPERATOR_MULT:
+            case Consts.OPERATOR_MULT:
                 result = numberOne * numberTwo;
                 break;
-            case Constantes.OPERATOR_SPLIT:
+            case Consts.OPERATOR_SPLIT:
                 result = numberOne / numberTwo;
                 break;
-            case Constantes.OPERATOR_ADD:
+            case Consts.OPERATOR_ADD:
                 result = numberOne + numberTwo;
                 break;
-            case Constantes.OPERATOR_SUB:
+            case Consts.OPERATOR_SUB:
                 result = numberOne - numberTwo;
                 break;
         }
@@ -93,12 +93,12 @@ public class Metodos {
         final String ultimoCaracter = String.valueOf(s.charAt(s.length()-1));
         final String penultimoCaracter = String.valueOf(s.charAt(s.length()-2));
 
-        return (ultimoCaracter.equals(Constantes.OPERATOR_MULT) ||
-                ultimoCaracter.equals(Constantes.OPERATOR_SPLIT) ||
-                ultimoCaracter.equals(Constantes.OPERATOR_ADD)) &&
-                (String.valueOf(s.charAt(s.length() - 2)).equals(Constantes.OPERATOR_MULT) ||
-                penultimoCaracter.equals(Constantes.OPERATOR_SPLIT) ||
-                penultimoCaracter.equals(Constantes.OPERATOR_ADD) ||
-                penultimoCaracter.equals(Constantes.OPERATOR_SUB));
+        return (ultimoCaracter.equals(Consts.OPERATOR_MULT) ||
+                ultimoCaracter.equals(Consts.OPERATOR_SPLIT) ||
+                ultimoCaracter.equals(Consts.OPERATOR_ADD)) &&
+                (String.valueOf(s.charAt(s.length() - 2)).equals(Consts.OPERATOR_MULT) ||
+                penultimoCaracter.equals(Consts.OPERATOR_SPLIT) ||
+                penultimoCaracter.equals(Consts.OPERATOR_ADD) ||
+                penultimoCaracter.equals(Consts.OPERATOR_SUB));
     }
 }
